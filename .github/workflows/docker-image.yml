@@ -3,7 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - Dev
+      - main
 
 env:        # 👈 Define environment variables here
   DOCKER_IMAGE: muralisocial123/aws-retail-app
