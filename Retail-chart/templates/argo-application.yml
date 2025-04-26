@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/Msocial123/AWS-Retail-App.git
-    targetRevision: dev
+    repoURL: https://github.com/Msocial123/Shine-GitOps-Project.git
+    targetRevision: main
     path: Retail-chart
     helm:
       values: |
