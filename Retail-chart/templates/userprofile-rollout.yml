@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: userprofile-rollout
+spec:
+  replicas: {{ .Values.replicaCount.userprofile }}
+  strategy:
+    blueGreen:
+      activeService: userprofile-active-service
+      previewService: userprofile-preview-service
+      autoPromotionEnabled: false  # Set to true for automatic rollout
+  selector:
+    matchLabels:
+      app: userprofile
+  template:
+    metadata:
+      labels:
+        app: userprofile
+    spec:
+      containers:
+        - name: userprofile
+          image: {{ .Values.userprofile.image }}
+          ports:
+            - containerPort: {{ .Values.userprofile.port }}
+          env:
+            - name: MONGODB_URI
+              value: "{{ .Values.userprofile.mongodbUri }}"
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: userprofile-secret
+                  key: SESSION_SECRET
+            - name: EMAIL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: userprofile-secret
+                  key: EMAIL_USER
+            - name: EMAIL_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: userprofile-secret
+                  key: EMAIL_PASS
+            - name: PORT
+              value: "{{ .Values.userprofile.port }}"

@@ -1,0 +1,38 @@
+replicaCount:
+  mongodb: 2
+  userprofile: 3
+
+database:
+  name: myDatabase
+  image: mongo:latest
+  label: mongodb-deployment
+
+userprofile:
+  name: userprofile-deployment
+  image: saiteja2502/userprofileretail:latest
+  port: 3130
+  mongodbUri: "mongodb://mongodb-deployment:27017/myDatabase"
+  label: userprofile
+  activeVersion: blue  # Change to 'green' when switching versions
+
+mongodb:
+  service:
+    name: mongodb-deployment
+    type: ClusterIP
+    port: 27017
+    targetPort: 27017
+
+env:
+  SESSION_SECRET: SESSION_SECRET
+  EMAIL_USER: EMAIL_USER
+  EMAIL_PASS: EMAIL_PASS
+  PORT: PORT
+
+secrets:
+  SESSION_SECRET: MTIzNA==  # Base64 encoded value of "1234"
+  EMAIL_USER: Y2hhZ2FudHl0ZWphMjUwMkBnbWFpbC5jb20=
+  EMAIL_PASS: eXhvcS1ianVrLXJkbnQtYWx6cA==
+
+service:
+  userprofile:
+    type: LoadBalancer

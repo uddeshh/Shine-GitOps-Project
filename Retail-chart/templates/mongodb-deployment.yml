@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+spec:
+  replicas: {{ .Values.replicaCount.mongodb }}
+  selector:
+    matchLabels:
+      app: {{ .Values.database.label }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.database.label }}
+    spec:
+      containers:
+        - name: {{ .Values.database.label }}
+          image: "{{ .Values.database.image }}"
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_DATABASE
+              value: "{{ .Values.database.name }}"
