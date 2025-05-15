@@ -5,9 +5,9 @@ on:
     branches:
       - main
 
-env:        # 👈 Define environment variables here
+env:
   DOCKER_IMAGE: muralisocial123/aws-retail-app
-  DOCKER_TAG: v1.2.0
+  DOCKER_TAG: v1.3.0
 
 jobs:
   build-and-push:
@@ -32,3 +32,9 @@ jobs:
           context: .
           push: true
           tags: ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
+
+      - name: Run docker-compose
+        run: |
+          docker-compose down || true
+          docker-compose pull
+          docker-compose up -d
