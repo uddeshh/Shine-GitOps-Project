@@ -8,6 +8,9 @@ on:
 env:
   DOCKER_IMAGE: uddeshh/aws-retail-app
   DOCKER_TAG: v1.4.0
+  DOCKER_USERNAME: uddeshh
+  DOCKER_PASSWORD: @Uddesh123
+  
 
 jobs:
   build-and-push:
