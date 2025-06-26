@@ -8,10 +8,7 @@ on:
 env:
   DOCKER_IMAGE: uddeshh/aws-retail-app
   DOCKER_TAG: v1.4.0
-  DOCKER_USERNAME: uddeshh
-  DOCKER_PASSWORD: @Uddesh123
   
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -26,8 +23,8 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.A1 }}
+          password: ${{ secrets.A2 }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
