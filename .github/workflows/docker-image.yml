@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  DOCKER_IMAGE: muralisocial123/aws-retail-app
+  DOCKER_IMAGE: uddeshh/aws-retail-app
   DOCKER_TAG: v1.4.0
 
 jobs:
